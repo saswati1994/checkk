@@ -1,5 +1,6 @@
 package com.example.restaurantservice.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -63,13 +64,18 @@ public class TestController {
 	  @GetMapping("/cart/{cartId}")
 	  public String getCartItemById(@PathVariable Long cartId,ModelMap model) {
 		  Cart cart =new Cart();
+		 // Item item =new Item();
+		  List<Item> items = new ArrayList<Item>();
 		 Optional<Cart> cartOptions = cartRepository.findById(cartId);
 		 if(cartOptions.isPresent()) {
 			  cart = cartOptions.get();
+			 
+					 items=  cart.getItems();
 		 }else {
 			 
 		 }
 		 model.put("cartitems", cart);
+		 model.put("item", items);
 		return "ViewCart";
 		  
 	  }
