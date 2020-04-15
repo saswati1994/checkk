@@ -62,10 +62,11 @@ public class TestController {
 
 	  }
 	  @GetMapping("/cart/{cartId}")
-	  public String getCartItemById(@PathVariable Long cartId,ModelMap model) {
+	  public String getCartItemById(@PathVariable Long cartId, ModelMap model) {
 		  Cart cart =new Cart();
 		 // Item item =new Item();
 		  List<Item> items = new ArrayList<Item>();
+		  Item item = new Item();
 		 Optional<Cart> cartOptions = cartRepository.findById(cartId);
 		 if(cartOptions.isPresent()) {
 			  cart = cartOptions.get();
@@ -74,8 +75,17 @@ public class TestController {
 		 }else {
 			 
 		 }
+
+		 item.setItemName("testItem");
+		 item.setPrice(12L);
+		 items.add(item);
+		 cart.setItems(items);
+		 cart.setCartId(1L);
+		 cart.setUserId("3467687");
+
+
 		 model.put("cartitems", cart);
-		 model.put("item", items);
+		 model.put("items", items);
 		return "ViewCart";
 		  
 	  }

@@ -15,11 +15,13 @@ import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @Table(name = "items")
 @Getter
 @Setter
+@ToString
 @AllArgsConstructor
 public class Item implements Serializable {
 
